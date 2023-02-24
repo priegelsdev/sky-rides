@@ -4,9 +4,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#89a5c0',
+        primary: '#425b81',
         secondary: '#879499',
         accent: '#E0D6B8',
+      },
+      backgroundImage: {
+        hero: "url('./src/assets/images/hero-bg.jpg')",
+        about: "url('./src/assets/images/about.jpg')",
       },
     },
   },
