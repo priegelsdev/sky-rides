@@ -19,7 +19,7 @@ export default function Home() {
           you're planning a weekend getaway or a cross-country adventure,
           FlyRides has got you covered.
         </p>
-        <button className="py-1 px-10 mx-auto my-10 bg-secondary text-white font-bold rounded-md">
+        <button className="py-1 px-10 mx-auto my-10 bg-secondary text-white font-semibold rounded-md">
           Find your ride
         </button>
       </main>
