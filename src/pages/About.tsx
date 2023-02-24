@@ -8,7 +8,7 @@ export default function About() {
     <>
       <Header />
       {/* change height once page fills up*/}
-      <div className="h-96 bg-secondary">
+      <div className="h-screen bg-secondary font-inter flex flex-col">
         <img src={aboutImg} />
         <h1 className="text-center font-bold">About</h1>
       </div>

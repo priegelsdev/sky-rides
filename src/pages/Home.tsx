@@ -6,7 +6,7 @@ export default function Home() {
     <>
       <Header />
       {/* change height once page fills up*/}
-      <main className="h-screen bg-hero bg-cover bg-center">
+      <main className="h-screen bg-hero bg-cover bg-center font-inter">
         <h1 className="text-center font-bold">
           Fly high, ride easy with FlyRides
         </h1>
