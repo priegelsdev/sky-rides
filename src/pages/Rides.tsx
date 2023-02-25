@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
+interface Ride {
+  name: string;
+  imageUrl: string;
+  price: number;
+  type: string;
+}
+
 export default function Rides() {
   // state that holds data fetched from server
-  const [rides, setRides] = useState([]);
+  const [rides, setRides] = useState<Ride[]>([]);
 
   // hook that fetches api data on page load
   useEffect(() => {
