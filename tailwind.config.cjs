@@ -10,6 +10,7 @@ module.exports = {
         primary: '#344556',
         secondary: '#9fa9b5',
         accent: '#E0D6B8',
+        accentTwo: '#e5a109',
       },
       backgroundImage: {
         hero: "url('/src/img/hero-bg.jpg')",
