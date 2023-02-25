@@ -66,11 +66,11 @@ createServer({
     this.namespace = 'api';
     this.logging = false;
 
-    this.get('/rides', (schema, request) => {
+    this.get('/rides', (schema: any, request) => {
       return schema.rides.all();
     });
 
-    this.get('/rides/:id', (schema, request) => {
+    this.get('/rides/:id', (schema: any, request) => {
       const id = request.params.id;
       return schema.rides.find(id);
     });
