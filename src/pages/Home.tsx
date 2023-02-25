@@ -1,8 +1,6 @@
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
-import picture from '../img/hero-bg.jpg';
-
 import { Link } from 'react-router-dom';
 
 export default function Home() {
@@ -17,7 +15,6 @@ export default function Home() {
             FlyRides
           </span>
         </h1>
-        <img src={picture} />
         <p className="drop-shadow-lg font-medium md:text-center">
           Soar to new heights with FlyRides. Choose from our fleet of
           comfortable and reliable rides to make your journey a breeze. <br />
