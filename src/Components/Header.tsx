@@ -6,9 +6,9 @@ export default function Header() {
       <h1 className="text-2xl font-black">#FLYRIDES</h1>
       <nav className="flex gap-5 font-medium">
         <NavLink to="/">Home</NavLink>
-        <NavLink to="about">About</NavLink>
-        {/*         <NavLink to="">Rides</NavLink>
-        <NavLink to="">Profile</NavLink> */}
+        <NavLink to="/about">About</NavLink>
+        <NavLink to="/rides">Rides</NavLink>
+        {/* <NavLink to="">Profile</NavLink> */}
       </nav>
     </header>
   );
