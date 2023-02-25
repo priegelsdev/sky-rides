@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 export default function Home() {
   return (
     <div className="h-screen">
-      <Header />
       {/* change height once page fills up*/}
       <main className="h-full px-6 bg-hero bg-cover bg-center font-inter flex flex-col">
         <h1 className="text-center text-3xl font-extrabold py-10 leading-snug">
@@ -28,7 +27,6 @@ export default function Home() {
           Find your ride
         </Link>
       </main>
-      <Footer />
     </div>
   );
 }

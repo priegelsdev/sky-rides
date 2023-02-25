@@ -8,7 +8,6 @@ import aboutImg from '../img/about.jpg';
 export default function About() {
   return (
     <>
-      <Header />
       {/* change height once page fills up*/}
       <div className="bg-primary font-inter flex flex-col">
         <img className="max-h-72 object-cover object-bottom" src={aboutImg} />
@@ -36,7 +35,6 @@ export default function About() {
           </Link>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

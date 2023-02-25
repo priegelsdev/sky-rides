@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Rides from './pages/Rides';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
 
 import '../server';
 
@@ -12,11 +14,13 @@ import '../server';
 export default function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/rides" element={<Rides />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
