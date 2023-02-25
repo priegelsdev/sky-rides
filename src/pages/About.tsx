@@ -3,7 +3,7 @@ import Footer from '../Components/Footer';
 
 import { Link } from 'react-router-dom';
 
-import aboutImg from '../assets/images/about.jpg';
+import aboutImg from '../img/about.jpg';
 
 export default function About() {
   return (
