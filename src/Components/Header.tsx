@@ -7,8 +7,8 @@ export default function Header() {
       <nav className="flex gap-5 font-medium">
         <NavLink to="/">Home</NavLink>
         <NavLink to="about">About</NavLink>
-        <NavLink to="">Rides</NavLink>
-        <NavLink to="">Profile</NavLink>
+        {/*         <NavLink to="">Rides</NavLink>
+        <NavLink to="">Profile</NavLink> */}
       </nav>
     </header>
   );
