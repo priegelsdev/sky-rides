@@ -1,6 +1,8 @@
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
+import { Link } from 'react-router-dom';
+
 import aboutImg from '../assets/images/about.jpg';
 
 export default function About() {
@@ -23,12 +25,15 @@ export default function About() {
           of taking rides to new heights.
         </p>
         <div className="bg-secondary rounded-md mx-6 mt-12 mb-10 px-7 py-6">
-          <h3 className="text-md md:text-lg font-bold leading-tight">
+          <h3 className="text-md md:text-lg font-bold leading-tight mb-3">
             Your destination is waiting. <br /> Your ride is ready.
           </h3>
-          <button className="bg-gray-900 rounded-lg px-4 py-2 mt-4 text-white text-xs font-semibold">
+          <Link
+            to="/rides"
+            className="bg-gray-900 rounded-lg px-4 py-2 text-white text-xs font-semibold"
+          >
             Explore our rides
-          </button>
+          </Link>
         </div>
       </div>
       <Footer />

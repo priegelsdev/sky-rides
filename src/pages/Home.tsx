@@ -1,6 +1,8 @@
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
+import { Link } from 'react-router-dom';
+
 export default function Home() {
   return (
     <div className="h-screen">
@@ -19,9 +21,12 @@ export default function Home() {
           Whether you're planning a weekend getaway or a cross-country
           adventure, FlyRides has got you covered.
         </p>
-        <button className="py-2 px-10 mx-auto my-10 bg-primary text-gray-200 font-semibold rounded-md">
+        <Link
+          to="/rides"
+          className="py-2 px-10 mx-auto my-10 bg-primary text-gray-200 font-semibold rounded-md"
+        >
           Find your ride
-        </button>
+        </Link>
       </main>
       <Footer />
     </div>
