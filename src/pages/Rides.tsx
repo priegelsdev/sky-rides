@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 interface Ride {
+  id: number;
   name: string;
   imageUrl: string;
   price: number;
@@ -21,25 +23,27 @@ export default function Rides() {
   console.log(rides);
 
   const rideElements = rides.map((ride) => (
-    <div>
-      <img
-        className="aspect-square max-h-[32rem] rounded-md"
-        src={ride.imageUrl}
-      />
-      <h1 className="font-semibold my-3">{ride.name}</h1>
-      <p className="mb-3">${ride.price}/day</p>
-      <span
-        className={`rounded-md py-1 px-6 text-gray-800 ${
-          ride.type === 'rugged'
-            ? 'bg-accent'
-            : ride.type === 'luxury'
-            ? 'bg-accentTwo'
-            : 'bg-secondary'
-        }`}
-      >
-        {ride.type}
-      </span>
-    </div>
+    <Link to={`/rides/${ride.id}`}>
+      <div>
+        <img
+          className="aspect-square max-h-[32rem] rounded-md"
+          src={ride.imageUrl}
+        />
+        <h1 className="font-semibold my-3">{ride.name}</h1>
+        <p className="mb-3">${ride.price}/day</p>
+        <span
+          className={`rounded-md py-1 px-6 text-gray-800 ${
+            ride.type === 'rugged'
+              ? 'bg-accent'
+              : ride.type === 'luxury'
+              ? 'bg-accentTwo'
+              : 'bg-secondary'
+          }`}
+        >
+          {ride.type}
+        </span>
+      </div>
+    </Link>
   ));
 
   return (

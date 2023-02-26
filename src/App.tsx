@@ -9,6 +9,7 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 
 import '../server';
+import RideDetail from './pages/RideDetail';
 
 // TODO: figure out app structure and where to actually put the routing; App.tsx probably correct, but not like this
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/rides" element={<Rides />} />
+        <Route path="/rides/:id" element={<RideDetail />} />
       </Routes>
       <Footer />
     </BrowserRouter>
