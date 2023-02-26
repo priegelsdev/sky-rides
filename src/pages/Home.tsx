@@ -9,7 +9,8 @@ export default function Home() {
       {/* change height once page fills up*/}
       <main className="h-full px-6 bg-hero bg-cover bg-center font-inter flex flex-col">
         <h1 className="text-center text-3xl font-extrabold py-10 leading-snug">
-          Fly high, ride easy <br /> with{' '}
+          Fly <span className="text-primary drop-shadow-sm">high</span>, ride{' '}
+          <span className="text-primary drop-shadow-sm">easy</span> <br /> with{' '}
           <span className="drop-shadow-[2px_2px_6px_rgba(0,0,0,0.53)] text-accent decoration-primary">
             FlyRides
           </span>
