@@ -12,7 +12,7 @@ createServer({
       price: 220,
       description:
         "The SkyHawk is a sleek and agile flying car that's perfect for zooming through the skies. With its powerful engines and advanced flight systems, the SkyHawk is the ultimate allround aerial machine.",
-      imageUrl: '/src/img/skyhawk.jpeg',
+      imageUrl: 'img/skyhawk.jpeg',
       type: 'simple',
     });
     server.create('ride', {
