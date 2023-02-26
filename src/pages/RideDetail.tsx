@@ -1,5 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { json, useParams } from 'react-router-dom';
+import { json, Link, useParams } from 'react-router-dom';
+
+const backArrow = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    className="w-4 h-4 mt-1"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
+    />
+  </svg>
+);
 
 // define Ride type that gets fetched from our server
 interface Ride {
@@ -29,9 +46,15 @@ export default function RideDetail() {
   return (
     <div className="bg-primary text-white px-6">
       {ride ? (
-        <div className="lg:flex lg:flex-col lg:max-w-[32rem] lg:m-auto">
+        <div className="lg:flex lg:flex-col lg:max-w-[40rem] lg:m-auto">
+          <Link
+            to="/rides"
+            className="flex gap-2 ml-8 underline underline-offset-2"
+          >
+            {backArrow} Back to our rides...
+          </Link>
           <img
-            className="aspect-square max-h-[32rem] rounded-md mb-12"
+            className="aspect-square max-h-[32rem] lg:max-h-[40rem] lg:h-[40rem] lg:min-w-[40rem] rounded-md my-12"
             src={ride.imageUrl}
           />
           <span
@@ -51,8 +74,8 @@ export default function RideDetail() {
           <p className="mb-4 text-xl">
             <span className="text-2xl font-bold">${ride.price}</span>/day
           </p>
-          <p className="mb-4 lg:max-w-[32rem] ">{ride.description}</p>
-          <button className="w-full bg-accentTwo rounded-md text-lg font-semibold py-2 mb-6 lg:max-w-[32rem]">
+          <p className="mb-4 lg:max-w-[40rem] ">{ride.description}</p>
+          <button className="w-full bg-accentTwo rounded-md text-lg font-semibold py-2 mb-6 lg:max-w-[40rem]">
             Rent this ride
           </button>
         </div>
