@@ -22,9 +22,12 @@ export default function Rides() {
 
   const rideElements = rides.map((ride) => (
     <div>
-      <img className="aspect-square w-60 rounded-md" src={ride.imageUrl} />
+      <img
+        className="aspect-square max-h-[32rem] rounded-md"
+        src={ride.imageUrl}
+      />
       <h1 className="font-semibold my-3">{ride.name}</h1>
-      <p className="mb-2">${ride.price}/day</p>
+      <p className="mb-3">${ride.price}/day</p>
       <span
         className={`rounded-md py-1 px-6 text-gray-800 ${
           ride.type === 'rugged'
@@ -42,7 +45,9 @@ export default function Rides() {
   return (
     <div className="bg-primary px-6 text-white">
       <h1 className="text-accent text-3xl font-semibold">Explore our rides</h1>
-      <div className="flex flex-wrap gap-10 py-8">{rideElements}</div>
+      <div className="grid grid-cols-2 lg:grid-cols-3 justify-items-center gap-10 py-8">
+        {rideElements}
+      </div>
     </div>
   );
 }
