@@ -12,14 +12,14 @@ export default function Home() {
           Fly <span className="text-primary drop-shadow-sm">high</span>, ride{' '}
           <span className="text-primary drop-shadow-sm">easy</span> <br /> with{' '}
           <span className="drop-shadow-[2px_2px_6px_rgba(0,0,0,0.53)] text-accent decoration-primary">
-            FlyRides
+            SkyRides
           </span>
         </h1>
         <p className="drop-shadow-lg font-medium md:text-center">
-          Soar to new heights with FlyRides. Choose from our fleet of
+          Soar to new heights with SkyRides. Choose from our fleet of
           comfortable and reliable rides to make your journey a breeze. <br />
           Whether you're planning a weekend getaway or a cross-country
-          adventure, FlyRides has got you covered.
+          adventure, SkyRides has got you covered.
         </p>
         <Link
           to="/rides"

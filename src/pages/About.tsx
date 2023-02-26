@@ -20,7 +20,7 @@ export default function About() {
           let you experience the freedom of flight.
           <br />
           <br />
-          Our team is full of flyride enthusiasts who know firsthand the magic
+          Our team is full of skyride enthusiasts who know firsthand the magic
           of taking rides to new heights.
         </p>
         <div className="bg-secondary rounded-md mx-6 mt-12 mb-10 px-7 py-6">
