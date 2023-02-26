@@ -27,9 +27,12 @@ export default function Rides() {
       <p className="mb-2">${ride.price}/day</p>
       <span
         className={`rounded-md py-1 px-6 text-gray-800 ${
-          ride.type === 'rugged' ? 'bg-accent' : 'bg-secondary'
-        } 
-        ${ride.type === 'luxury' ? 'bg-accentTwo' : ''}`}
+          ride.type === 'rugged'
+            ? 'bg-accent'
+            : ride.type === 'luxury'
+            ? 'bg-accentTwo'
+            : 'bg-secondary'
+        }`}
       >
         {ride.type}
       </span>
