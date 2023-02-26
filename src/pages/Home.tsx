@@ -15,7 +15,7 @@ export default function Home() {
             SkyRides
           </span>
         </h1>
-        <p className="drop-shadow-lg font-medium md:text-center">
+        <p className="drop-shadow-sm font-medium md:text-center bg-gray-100 bg-opacity-30 rounded-xl p-3">
           Soar to new heights with SkyRides. Choose from our fleet of
           comfortable and reliable rides to make your journey a breeze. <br />
           Whether you're planning a weekend getaway or a cross-country
