@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+// define Ride type that gets fetched from our server
 interface Ride {
   id: number;
   name: string;
