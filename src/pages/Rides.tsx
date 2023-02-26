@@ -44,7 +44,9 @@ export default function Rides() {
 
   return (
     <div className="bg-primary px-6 text-white">
-      <h1 className="text-accent text-3xl font-semibold">Explore our rides</h1>
+      <h1 className="text-accent text-3xl font-semibold">
+        Explore our ride options
+      </h1>
       <div className="grid grid-cols-2 lg:grid-cols-3 justify-items-center gap-10 py-8">
         {rideElements}
       </div>
