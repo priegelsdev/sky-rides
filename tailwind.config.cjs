@@ -14,8 +14,7 @@ module.exports = {
         accentTwo: '#f5cc52',
       },
       backgroundImage: {
-        hero: "url('/src/img/hero-bg.jpg')",
-        about: "url('./src/img/about.jpg')",
+        hero: "url('/src/img/background-home.png')",
       },
     },
   },
