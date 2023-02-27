@@ -24,7 +24,9 @@ export default function Rides() {
       .then((data) => setRides(data.rides));
   }, []);
 
-  const rideElements = rides.map((ride) => (
+  const displayedRides = typeFilter ? rides.filter(ride => ride.type === typeFilter) : rides
+
+  const rideElements = displayedRides.map((ride) => (
     <Link to={`/rides/${ride.id}`}>
       <div>
         <img
