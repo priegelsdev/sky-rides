@@ -33,7 +33,7 @@ export default function Rides() {
           className="aspect-square max-h-[32rem] rounded-md"
           src={ride.imageUrl}
         />
-        <h1 className="font-semibold my-3">{ride.name}</h1>
+        <h1 className="font-semibold my-3 text-lg">{ride.name}</h1>
         <p className="mb-3">${ride.price}/day</p>
         <span
           className={`rounded-md py-1 px-6 text-gray-800 ${
@@ -58,28 +58,28 @@ export default function Rides() {
       <div className="flex gap-4 mt-4">
         <button
           onClick={() => setSearchParams({ type: 'simple' })}
-          className="bg-primaryLight py-1 px-4 rounded-md hover:bg-secondary hover:text-gray-800"
+          className={`${typeFilter === 'simple' ? 'bg-secondary text-gray-800' : 'bg-primaryLight'} py-1 px-4 rounded-md hover:bg-secondary hover:text-gray-800`}
         >
           Simple
         </button>
         <button
           onClick={() => setSearchParams({ type: 'luxury' })}
-          className="bg-primaryLight py-1 px-4 rounded-md hover:bg-accentTwo hover:text-gray-800"
+          className={`${typeFilter === 'luxury' ? 'bg-accentTwo text-gray-800' : 'bg-primaryLight'} py-1 px-4 rounded-md hover:bg-accentTwo hover:text-gray-800`}
         >
           Luxury
         </button>
         <button
           onClick={() => setSearchParams({ type: 'rugged' })}
-          className="bg-primaryLight py-1 px-4 rounded-md hover:bg-accent hover:text-gray-800"
+          className={`${typeFilter === 'rugged' ? 'bg-accent text-gray-800' : 'bg-primaryLight'} py-1 px-4 rounded-md hover:bg-accent hover:text-gray-800`}
         >
           Rugged
         </button>
-        <button
+        {typeFilter && <button
           onClick={() => setSearchParams({})}
           className="text-gray-300 underline underline-offset-1"
         >
           Clear filter
-        </button>
+        </button>}
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-3 justify-items-center gap-10 py-8">
         {rideElements}

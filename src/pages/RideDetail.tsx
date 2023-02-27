@@ -75,7 +75,7 @@ export default function RideDetail() {
             <span className="text-2xl font-bold">${ride.price}</span>/day
           </p>
           <p className="mb-4 lg:max-w-[40rem] ">{ride.description}</p>
-          <button className="w-full bg-accentTwo rounded-md text-lg font-semibold py-2 mb-6 lg:max-w-[40rem]">
+          <button className="w-full bg-accentTwo text-gray-800 rounded-md text-lg font-semibold py-2 mb-6 lg:max-w-[40rem]">
             Rent this ride
           </button>
         </div>
