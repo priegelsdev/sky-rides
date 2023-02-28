@@ -44,7 +44,7 @@ export default function RideDetail() {
   console.log(ride);
 
   return (
-    <div className="bg-primary text-white px-6">
+    <div className="text-white px-6">
       {ride ? (
         <div className="lg:flex lg:flex-col lg:max-w-[40rem] lg:m-auto">
           <Link
