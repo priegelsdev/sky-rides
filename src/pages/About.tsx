@@ -8,7 +8,10 @@ import aboutImg from '../img/about.jpg';
 export default function About() {
   return (
     <div className="font-inter flex flex-col">
-      <img className="max-h-72 object-cover object-center" src={aboutImg} />
+      <img
+        className="max-h-60 md:max-h-72 object-cover object-center"
+        src={aboutImg}
+      />
       <h1 className="font-bold text-accent text-2xl px-6 mt-8 mb-4">
         The sky's the limit
       </h1>
