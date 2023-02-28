@@ -9,7 +9,7 @@ export default function Header() {
   }
 
   return (
-    <header className="relative bg-primary flex justify-between text-white font-inter py-10 px-6">
+    <header className="relative bg-primary flex justify-between text-white font-inter py-10 px-6 border-none">
       <Link to="/" className="text-2xl font-black drop-shadow-md mr-2">
         #SKYRIDES
       </Link>
