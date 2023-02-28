@@ -10,7 +10,7 @@ export default function About() {
     <>
       {/* change height once page fills up*/}
       <div className="bg-primary font-inter flex flex-col">
-        <img className="max-h-72 object-cover object-bottom" src={aboutImg} />
+        <img className="max-h-72 object-cover object-center" src={aboutImg} />
         <h1 className="font-bold text-accent text-2xl px-6 mt-8 mb-4">
           The sky's the limit
         </h1>
