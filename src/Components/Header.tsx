@@ -22,11 +22,32 @@ export default function Header() {
       </button>
       <nav
         id="navbar"
-        className="hidden md:flex flex flex-col items-end gap-3 text-lg font-medium mr-12 md:mr-0 md:flex-row"
+        className="hidden md:flex flex flex-col items-end gap-3 font-medium mr-12 md:mr-0 md:flex-row"
       >
-        <NavLink to="/host">Host</NavLink>
-        <NavLink to="/about">About</NavLink>
-        <NavLink to="/rides">Rides</NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? 'font-bold underline text-lg' : ''
+          }
+          to="/host"
+        >
+          Host
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? 'font-bold underline text-lg' : ''
+          }
+          to="/about"
+        >
+          About
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? 'font-bold underline text-lg' : ''
+          }
+          to="/rides"
+        >
+          Rides
+        </NavLink>
         {/* <NavLink to="">Profile</NavLink> */}
       </nav>
     </header>
