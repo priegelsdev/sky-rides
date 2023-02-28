@@ -4,15 +4,17 @@ import { FaBars } from 'react-icons/fa';
 export default function Header() {
   function toggleNav() {
     document.getElementById('navbar')?.classList.toggle('hidden');
+    document.getElementById('navbar')?.classList.toggle('mr-12');
+    document.getElementById('navbar')?.classList.toggle('mt-10');
   }
 
   return (
-    <header className="relative bg-primary flex justify-between items-center text-white font-inter py-10 px-6">
+    <header className="relative bg-primary flex justify-between  text-white font-inter py-10 px-6">
       <h1 className="text-2xl font-black drop-shadow-md mr-2">#SKYRIDES</h1>
       <button
         onClick={toggleNav}
         id="navbar-btn"
-        className="md:hidden absolute mt-1/2 right-5"
+        className="md:hidden absolute mt-1/2 right-6"
       >
         <FaBars size={30} />
       </button>
