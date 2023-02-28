@@ -49,7 +49,7 @@ export default function RideDetail() {
         <div className="lg:flex lg:flex-col lg:max-w-[40rem] lg:m-auto">
           <Link
             to="/rides"
-            className="flex gap-2 ml-8 underline underline-offset-2"
+            className="flex gap-2 ml-4 underline underline-offset-2"
           >
             {backArrow} Back to our rides...
           </Link>
