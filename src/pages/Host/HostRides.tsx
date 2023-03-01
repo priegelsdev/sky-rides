@@ -43,7 +43,9 @@ export default function HostRides() {
   return (
     <div className="pb-6">
       <h1 className="text-3xl font-bold text-accent mb-7">Your listed rides</h1>
-      <div className="flex flex-col gap-6">{rideElements}</div>
+      <div className="flex flex-col gap-6">
+        {rides.length > 0 ? rideElements : <h2>Loading...</h2>}
+      </div>
     </div>
   );
 }

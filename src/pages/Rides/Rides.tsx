@@ -98,7 +98,7 @@ export default function Rides() {
         )}
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-3 justify-items-center gap-10 py-8">
-        {rideElements}
+        {rides.length > 0 ? rideElements : <h2>Loading...</h2>}
       </div>
     </div>
   );
