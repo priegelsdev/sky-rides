@@ -17,6 +17,8 @@ import HostRideInfo from './pages/Host/HostRideInfo';
 import HostRidePricing from './pages/Host/HostRidePricing';
 import HostRidePhotos from './pages/Host/HostRidePhotos';
 
+import NotFound from './pages/NotFound';
+
 //layout
 import Layout from './Components/Layout';
 import HostLayout from './Components/HostLayout';
@@ -44,6 +46,7 @@ export default function App() {
               <Route path="photos" element={<HostRidePhotos />} />
             </Route>
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
