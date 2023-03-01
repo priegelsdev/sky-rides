@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
+import { getRides } from '../../../api';
+
 // define Ride type that gets fetched from our server
 interface Ride {
   id: number;
@@ -19,9 +21,12 @@ export default function Rides() {
 
   // hook that fetches api data on page load
   useEffect(() => {
-    fetch('/api/rides')
-      .then((res) => res.json())
-      .then((data) => setRides(data.rides));
+    async function loadRides() {
+      const data = await getRides();
+      setRides(data);
+    }
+
+    loadRides();
   }, []);
 
   const displayedRides = typeFilter
@@ -98,7 +103,11 @@ export default function Rides() {
         )}
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-3 justify-items-center gap-10 py-8">
-        {rides.length > 0 ? rideElements : <h2>Loading...</h2>}
+        {rides.length > 0 ? (
+          rideElements
+        ) : (
+          <h2 className="mr-auto">Loading...</h2>
+        )}
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Rides from './pages/Rides/Rides';
 import RideDetail from './pages/Rides/RideDetail';
+import NotFound from './pages/NotFound';
 
 import Dashboard from './pages/Host/Dashboard';
 import Reviews from './pages/Host/Reviews';
@@ -16,8 +17,6 @@ import HostRideDetail from './pages/Host/HostRideDetail';
 import HostRideInfo from './pages/Host/HostRideInfo';
 import HostRidePricing from './pages/Host/HostRidePricing';
 import HostRidePhotos from './pages/Host/HostRidePhotos';
-
-import NotFound from './pages/NotFound';
 
 //layout
 import Layout from './Components/Layout';
