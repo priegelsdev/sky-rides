@@ -4,7 +4,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 export default function Layout() {
   return (
     <div className="px-6 text-gray-200">
-      <nav className="flex gap-3 mb-3">
+      <nav className="flex gap-3 mb-8">
         <NavLink
           end
           to="/host"
@@ -25,6 +25,16 @@ export default function Layout() {
           }
         >
           Income
+        </NavLink>
+        <NavLink
+          to="/host/rides"
+          className={({ isActive }) =>
+            isActive
+              ? 'underline underline-offset-1 font-bold text-white'
+              : 'hover:font-bold hover:underline underline-offset-1'
+          }
+        >
+          Rides
         </NavLink>
         <NavLink
           to="/host/reviews"
