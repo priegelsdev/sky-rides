@@ -76,9 +76,7 @@ export default function HostRideDetail() {
                 {ride.name}
               </h1>
               <p>
-                <span className="text-lg md:text-xl font-bold">
-                  ${ride.price}
-                </span>
+                <span className="md:text-lg font-bold">${ride.price}</span>
                 /day
               </p>
             </div>
