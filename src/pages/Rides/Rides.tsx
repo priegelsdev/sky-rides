@@ -29,7 +29,7 @@ export default function Rides() {
     : rides;
 
   const rideElements = displayedRides.map((ride) => (
-    <Link to={`${ride.id}`}>
+    <Link to={`${ride.id}`} state={{ search: searchParams.toString() }}>
       <div>
         <img
           className="aspect-square max-h-[32rem] rounded-md"

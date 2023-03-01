@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { json, Link, useParams } from 'react-router-dom';
+import { json, Link, useParams, useLocation } from 'react-router-dom';
 
 const backArrow = (
   <svg
@@ -32,6 +32,10 @@ export default function RideDetail() {
   // get route params
   const params = useParams();
 
+  // get location to go back to filtered page if filter was active
+  const location = useLocation();
+  console.log(location);
+
   // initialize ride state as null to avoid errors when rendering unfetched state
   const [ride, setRide] = useState<Ride | null>(null);
 
@@ -41,17 +45,16 @@ export default function RideDetail() {
       .then((data) => setRide(data.rides));
   }, [params.id]);
 
-  console.log(ride);
-
   return (
     <div className="text-white px-6">
       {ride ? (
         <div className="lg:flex lg:flex-col lg:max-w-[40rem] lg:m-auto">
           <Link
-            to="/rides"
+            relative="path"
+            to={location ? `../?${location.state.search}` : '..'}
             className="flex gap-2 ml-4 underline underline-offset-2"
           >
-            {backArrow} Back to our rides...
+            {backArrow} Back to our rides
           </Link>
           <img
             className="aspect-square max-h-[32rem] lg:max-h-[40rem] lg:h-[40rem] lg:min-w-[40rem] rounded-md my-12"
