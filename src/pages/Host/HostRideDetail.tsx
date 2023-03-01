@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { json, Link, useParams } from 'react-router-dom';
+import {
+  json,
+  Link,
+  NavLink,
+  useParams,
+  Outlet,
+  useOutletContext,
+} from 'react-router-dom';
 
 const backArrow = (
   <svg
@@ -28,20 +35,24 @@ interface Ride {
   type: string;
 }
 
+// define outlet context type
+type ContextType = {
+  ride: Ride;
+};
+
 export default function HostRideDetail() {
   // get route params
   const params = useParams();
 
   // initialize ride state as null to avoid errors when rendering unfetched state
   const [ride, setRide] = useState<Ride | null>(null);
+  console.log(ride);
 
   useEffect(() => {
     fetch(`/api/host/rides/${params.id}`)
       .then((res) => res.json())
       .then((data) => setRide(data.rides[0]));
   }, [params.id]);
-
-  console.log(ride);
 
   return (
     <div>
@@ -53,10 +64,10 @@ export default function HostRideDetail() {
         {backArrow} Back to all rides
       </Link>
       {ride ? (
-        <div className="bg-secondary text-gray-800 p-5 rounded-sm">
-          <div className="flex gap-4 mb-6">
+        <div className="bg-secondary text-gray-800 p-5 rounded-sm mb-6">
+          <div className="flex gap-4">
             <img
-              className="aspect-square max-h-32 rounded-sm"
+              className="aspect-square max-h-52 rounded-md"
               src={ride.imageUrl}
             />
             <div className="flex flex-col items-start justify-center">
@@ -82,11 +93,50 @@ export default function HostRideDetail() {
               </p>
             </div>
           </div>
-          <p className="mb-4">{ride.description}</p>
+          {/* NAVBAR for host ride detail */}
+          <nav className="flex gap-3 my-4">
+            <NavLink
+              end
+              to="."
+              className={({ isActive }) =>
+                isActive
+                  ? 'underline underline-offset-1 font-bold'
+                  : 'hover:font-bold hover:underline underline-offset-1'
+              }
+            >
+              Details
+            </NavLink>
+            <NavLink
+              to="pricing"
+              className={({ isActive }) =>
+                isActive
+                  ? 'underline underline-offset-1 font-bold'
+                  : 'hover:font-bold hover:underline underline-offset-1'
+              }
+            >
+              Pricing
+            </NavLink>
+            <NavLink
+              to="photos"
+              className={({ isActive }) =>
+                isActive
+                  ? 'underline underline-offset-1 font-bold'
+                  : 'hover:font-bold hover:underline underline-offset-1'
+              }
+            >
+              Photos
+            </NavLink>
+          </nav>
+          <Outlet context={{ ride }} />
         </div>
       ) : (
         'Loading...'
       )}
     </div>
   );
+}
+
+// export custom hook for nested components
+export function useRide() {
+  return useOutletContext<ContextType>();
 }
