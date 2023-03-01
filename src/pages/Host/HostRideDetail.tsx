@@ -65,7 +65,7 @@ export default function HostRideDetail() {
                     ? 'bg-accent'
                     : ride.type === 'luxury'
                     ? 'bg-accentTwo'
-                    : 'bg-secondary border-2 border-solid border-gray-900'
+                    : 'bg-secondary border border-gray-600'
                 }
             lg:max-w-[6.2rem] 
             `}
