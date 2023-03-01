@@ -46,7 +46,8 @@ export default function HostRideDetail() {
   return (
     <div>
       <Link
-        to="/host/rides"
+        to=".."
+        relative="path"
         className="flex gap-2 underline underline-offset-2 mb-8"
       >
         {backArrow} Back to all rides
