@@ -34,7 +34,23 @@ export default function RideDetail() {
 
   // get location to go back to filtered page if filter was active
   const location = useLocation();
-  console.log(location);
+
+  // switch statement to determine text for back to rides button
+  function filterOption() {
+    switch (location.state.search) {
+      case 'type=simple':
+        return 'simple';
+        break;
+      case 'type=rugged':
+        return 'rugged';
+        break;
+      case 'type=luxury':
+        return 'luxury';
+        break;
+      default:
+        return 'our';
+    }
+  }
 
   // initialize ride state as null to avoid errors when rendering unfetched state
   const [ride, setRide] = useState<Ride | null>(null);
@@ -54,10 +70,10 @@ export default function RideDetail() {
             to={location ? `../?${location.state.search}` : '..'}
             className="flex gap-2 ml-4 underline underline-offset-2"
           >
-            {backArrow} Back to our rides
+            {backArrow} Back to {filterOption()} rides
           </Link>
           <img
-            className="aspect-square max-h-[32rem] lg:max-h-[40rem] lg:h-[40rem] lg:min-w-[40rem] rounded-md my-12"
+            className="aspect-square max-h-[32rem] lg:max-h-[40rem] lg:h-[40rem] lg:min-w-[40rem] rounded-md mt-6 mb-12"
             src={ride.imageUrl}
           />
           <span

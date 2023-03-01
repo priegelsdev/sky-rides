@@ -46,7 +46,6 @@ export default function HostRideDetail() {
 
   // initialize ride state as null to avoid errors when rendering unfetched state
   const [ride, setRide] = useState<Ride | null>(null);
-  console.log(ride);
 
   useEffect(() => {
     fetch(`/api/host/rides/${params.id}`)
@@ -59,7 +58,7 @@ export default function HostRideDetail() {
       <Link
         to=".."
         relative="path"
-        className="flex gap-2 underline underline-offset-2 mb-8"
+        className="flex gap-2 underline underline-offset-2 mb-6"
       >
         {backArrow} Back to all rides
       </Link>
