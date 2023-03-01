@@ -7,7 +7,7 @@ export default function Layout() {
       <nav className="flex gap-3 mb-8">
         <NavLink
           end
-          to="/host"
+          to="."
           className={({ isActive }) =>
             isActive
               ? 'underline underline-offset-1 font-bold text-white'
@@ -17,7 +17,7 @@ export default function Layout() {
           Dashboard
         </NavLink>
         <NavLink
-          to="/host/income"
+          to="income"
           className={({ isActive }) =>
             isActive
               ? 'underline underline-offset-1 font-bold text-white'
@@ -27,7 +27,7 @@ export default function Layout() {
           Income
         </NavLink>
         <NavLink
-          to="/host/rides"
+          to="rides"
           className={({ isActive }) =>
             isActive
               ? 'underline underline-offset-1 font-bold text-white'
@@ -37,7 +37,7 @@ export default function Layout() {
           Rides
         </NavLink>
         <NavLink
-          to="/host/reviews"
+          to="reviews"
           className={({ isActive }) =>
             isActive
               ? 'underline underline-offset-1 font-bold text-white'
