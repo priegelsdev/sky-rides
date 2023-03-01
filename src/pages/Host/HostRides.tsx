@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import { getHostRides } from '../../../api';
+
 interface Ride {
   id: number;
   name: string;
@@ -13,12 +15,19 @@ interface Ride {
 export default function HostRides() {
   // state that holds data fetched from server
   const [rides, setRides] = useState<Ride[]>([]);
+  // loading state
+  const [loading, setLoading] = useState<boolean>(false);
 
   // hook that fetches api data on page load
   useEffect(() => {
-    fetch('/api/host/rides')
-      .then((res) => res.json())
-      .then((data) => setRides(data.rides));
+    async function loadHostRides() {
+      setLoading(true);
+      const data = await getHostRides();
+      setRides(data);
+      setLoading(false);
+    }
+
+    loadHostRides();
   }, []);
 
   const rideElements = rides.map((ride) => (
@@ -40,12 +49,15 @@ export default function HostRides() {
     </Link>
   ));
 
+  // conditional loading render
+  if (loading) {
+    return <h1 className="text-3xl font-bold text-white">Loading...</h1>;
+  }
+
   return (
     <div className="pb-6">
       <h1 className="text-3xl font-bold text-accent mb-7">Your listed rides</h1>
-      <div className="flex flex-col gap-6">
-        {rides.length > 0 ? rideElements : <h2>Loading...</h2>}
-      </div>
+      <div className="flex flex-col gap-6">{rideElements}</div>
     </div>
   );
 }

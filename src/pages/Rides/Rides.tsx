@@ -15,6 +15,8 @@ interface Ride {
 export default function Rides() {
   // state that holds data fetched from server
   const [rides, setRides] = useState<Ride[]>([]);
+  // loading state
+  const [loading, setLoading] = useState<boolean>(false);
   // search params for filtering through rides
   const [searchParams, setSearchParams] = useSearchParams();
   const typeFilter = searchParams.get('type');
@@ -22,8 +24,10 @@ export default function Rides() {
   // hook that fetches api data on page load
   useEffect(() => {
     async function loadRides() {
+      setLoading(true);
       const data = await getRides();
       setRides(data);
+      setLoading(false);
     }
 
     loadRides();
@@ -56,6 +60,11 @@ export default function Rides() {
       </div>
     </Link>
   ));
+
+  // loading condition
+  if (loading) {
+    return <h1 className="text-2xl font-bold text-white p-6">Loading...</h1>;
+  }
 
   return (
     <div className="px-6 text-white">
@@ -103,11 +112,7 @@ export default function Rides() {
         )}
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-3 justify-items-center gap-10 py-8">
-        {rides.length > 0 ? (
-          rideElements
-        ) : (
-          <h2 className="mr-auto">Loading...</h2>
-        )}
+        {rideElements}
       </div>
     </div>
   );
