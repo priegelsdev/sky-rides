@@ -17,14 +17,21 @@ export default function HostRides() {
   const [rides, setRides] = useState<Ride[]>([]);
   // loading state
   const [loading, setLoading] = useState<boolean>(false);
+  // error state
+  const [error, setError] = useState<any>(null);
 
   // hook that fetches api data on page load
   useEffect(() => {
     async function loadHostRides() {
       setLoading(true);
-      const data = await getHostRides();
-      setRides(data);
-      setLoading(false);
+      try {
+        const data = await getHostRides();
+        setRides(data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
     }
 
     loadHostRides();
@@ -54,6 +61,16 @@ export default function HostRides() {
     return <h1 className="text-3xl font-bold text-white">Loading...</h1>;
   }
 
+  // conditional error render
+  if (error) {
+    return (
+      <h1 className="text-3xl font-bold text-white">
+        There was an error: {error.message}
+      </h1>
+    );
+  }
+
+  // successful render
   return (
     <div className="pb-6">
       <h1 className="text-3xl font-bold text-accent mb-7">Your listed rides</h1>

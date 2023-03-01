@@ -17,6 +17,9 @@ export default function Rides() {
   const [rides, setRides] = useState<Ride[]>([]);
   // loading state
   const [loading, setLoading] = useState<boolean>(false);
+  // error state
+  const [error, setError] = useState<any>(null);
+
   // search params for filtering through rides
   const [searchParams, setSearchParams] = useSearchParams();
   const typeFilter = searchParams.get('type');
@@ -25,9 +28,15 @@ export default function Rides() {
   useEffect(() => {
     async function loadRides() {
       setLoading(true);
-      const data = await getRides();
-      setRides(data);
-      setLoading(false);
+      try {
+        const data = await getRides();
+        setRides(data);
+      } catch (err) {
+        console.log(err);
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
     }
 
     loadRides();
@@ -66,6 +75,16 @@ export default function Rides() {
     return <h1 className="text-2xl font-bold text-white p-6">Loading...</h1>;
   }
 
+  // error condition
+  if (error) {
+    return (
+      <h1 className="text-2xl font-bold text-white p-6">
+        There was an error: {error.message}
+      </h1>
+    );
+  }
+
+  // successful render
   return (
     <div className="px-6 text-white">
       <h1 className="text-accent text-3xl font-semibold">
