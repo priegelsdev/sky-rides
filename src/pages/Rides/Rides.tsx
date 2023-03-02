@@ -28,7 +28,8 @@ export default function Rides() {
   const [error, setError] = useState<any>(null);
 
   // utilize loader data instead of use effect hook to fetch data
-  const rides = useLoaderData();
+  // use type assertion to prevent 'unknown' error
+  const rides: Ride[] = useLoaderData() as Ride[];
 
   const displayedRides = typeFilter
     ? rides.filter((ride) => ride.type === typeFilter)
@@ -57,11 +58,6 @@ export default function Rides() {
       </div>
     </Link>
   ));
-
-  // loading condition
-  if (loading) {
-    return <h1 className="text-2xl font-bold text-white p-6">Loading...</h1>;
-  }
 
   // error condition
   if (error) {
