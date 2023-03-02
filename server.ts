@@ -3,6 +3,7 @@ import { createServer, Model, Response } from 'miragejs';
 createServer({
   models: {
     rides: Model,
+    users: Model,
   },
 
   seeds(server) {
@@ -68,7 +69,7 @@ createServer({
     });
     // HARDCODING LOGIN creds just for showcasing purposes; not secure for real life use
     server.create('user', {
-      id: '123',
+      id: '1',
       email: 'test@me.com',
       password: '1010',
       name: 'Mr. Tester',
