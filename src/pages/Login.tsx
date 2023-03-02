@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { logInUser } from '../../api';
 
+interface LoginData {
+  email: string;
+  password: string;
+}
+
 export default function Login() {
   // defining login data state
-  const [logInData, setLogInData] = useState<object>({
+  const [logInData, setLogInData] = useState<LoginData>({
     email: '',
     password: '',
   });
@@ -12,14 +17,14 @@ export default function Login() {
   // use location state for when user gets rerouted automatically for when not logged in but trying to access protected route
   const location = useLocation();
 
-  function handleSubmit(e) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     // preventing default form submit action
     e.preventDefault();
     // calling login function; since returning a promise, chain to get info
     logInUser(logInData).then((data) => console.log(data));
   }
 
-  function handleChange(e) {
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     setLogInData((prev) => ({
       ...prev,
