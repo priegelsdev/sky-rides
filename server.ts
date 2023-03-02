@@ -1,4 +1,4 @@
-import { createServer, Model } from 'miragejs';
+import { createServer, Model, Response } from 'miragejs';
 
 createServer({
   models: {
@@ -66,6 +66,13 @@ createServer({
       type: 'luxury',
       hostId: '3',
     });
+    // HARDCODING LOGIN creds just for showcasing purposes; not secure for real life use
+    server.create('user', {
+      id: '123',
+      email: 'test@me.com',
+      password: '1010',
+      name: 'Mr. Tester',
+    });
   },
 
   routes() {
@@ -90,6 +97,25 @@ createServer({
       // hardcoding hostId temporarily TODO:
       const id = request.params.id;
       return schema.rides.where({ id, hostId: '1' });
+    });
+
+    // HARDCODING LOGIN just for showcasing purposes
+    this.post('/login', (schema: any, request) => {
+      const { email, password } = JSON.parse(request.requestBody);
+      const foundUser = schema.users.findBy({ email, password });
+      if (!foundUser) {
+        return new Response(
+          401,
+          {},
+          { message: 'No user with those credentials.' }
+        );
+      }
+
+      foundUser.password = undefined;
+      return {
+        user: foundUser,
+        token: 'yay',
+      };
     });
   },
 });
