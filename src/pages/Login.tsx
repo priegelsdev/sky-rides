@@ -29,6 +29,11 @@ export default function Login() {
 
   return (
     <div className="flex flex-col px-6 gap-6 md:w-[50%] lg:w-[40%] md:m-auto">
+      {location.state?.message && (
+        <h3 className="text-lg font-mono text-red-500 font-bold text-center -mb-3">
+          {location.state.message}
+        </h3>
+      )}
       <h1 className="text-3xl text-accent font-bold text-center">
         Sign in to your account
       </h1>

@@ -32,6 +32,7 @@ import Layout from './Components/Layout';
 import HostLayout from './Components/HostLayout';
 
 import '../server';
+import AuthRequired from './Components/AuthRequired';
 
 export default function App() {
   // define router variable to be used by RouterProvider in return statement
@@ -50,15 +51,17 @@ export default function App() {
         />
         <Route path="rides/:id" element={<RideDetail />} />
 
-        <Route path="host" element={<HostLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="income" element={<Income />} />
-          <Route path="reviews" element={<Reviews />} />
-          <Route path="rides" element={<HostRides />} />
-          <Route path="rides/:id" element={<HostRideDetail />}>
-            <Route index element={<HostRideInfo />} />
-            <Route path="pricing" element={<HostRidePricing />} />
-            <Route path="photos" element={<HostRidePhotos />} />
+        <Route element={<AuthRequired />}>
+          <Route path="host" element={<HostLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="income" element={<Income />} />
+            <Route path="reviews" element={<Reviews />} />
+            <Route path="rides" element={<HostRides />} />
+            <Route path="rides/:id" element={<HostRideDetail />}>
+              <Route index element={<HostRideInfo />} />
+              <Route path="pricing" element={<HostRidePricing />} />
+              <Route path="photos" element={<HostRidePhotos />} />
+            </Route>
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />
