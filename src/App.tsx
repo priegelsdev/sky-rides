@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+  Route,
+  Link,
+} from 'react-router-dom';
 
 //pages
 import Home from './pages/Home';
 import About from './pages/About';
-import Rides from './pages/Rides/Rides';
+import Rides, { loader as ridesLoader } from './pages/Rides/Rides';
 import RideDetail from './pages/Rides/RideDetail';
 import NotFound from './pages/NotFound';
 
@@ -25,29 +31,31 @@ import HostLayout from './Components/HostLayout';
 import '../server';
 
 export default function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="rides" element={<Rides />} />
-          <Route path="rides/:id" element={<RideDetail />} />
+  // define router variable to be used by RouterProvider in return statement
+  // createBrowserRouter used to utilize loaders and improve app
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="rides" element={<Rides />} loader={ridesLoader} />
+        <Route path="rides/:id" element={<RideDetail />} />
 
-          <Route path="host" element={<HostLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="income" element={<Income />} />
-            <Route path="reviews" element={<Reviews />} />
-            <Route path="rides" element={<HostRides />} />
-            <Route path="rides/:id" element={<HostRideDetail />}>
-              <Route index element={<HostRideInfo />} />
-              <Route path="pricing" element={<HostRidePricing />} />
-              <Route path="photos" element={<HostRidePhotos />} />
-            </Route>
+        <Route path="host" element={<HostLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="income" element={<Income />} />
+          <Route path="reviews" element={<Reviews />} />
+          <Route path="rides" element={<HostRides />} />
+          <Route path="rides/:id" element={<HostRideDetail />}>
+            <Route index element={<HostRideInfo />} />
+            <Route path="pricing" element={<HostRidePricing />} />
+            <Route path="photos" element={<HostRidePhotos />} />
           </Route>
-          <Route path="*" element={<NotFound />} />
         </Route>
-      </Routes>
-    </BrowserRouter>
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    )
   );
+
+  return <RouterProvider router={router} />;
 }

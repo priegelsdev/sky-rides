@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useLoaderData } from 'react-router-dom';
 
 import { getRides } from '../../../api';
 
@@ -12,35 +12,23 @@ interface Ride {
   type: string;
 }
 
+// loader data
+export function loader() {
+  return getRides();
+}
+
 export default function Rides() {
-  // state that holds data fetched from server
-  const [rides, setRides] = useState<Ride[]>([]);
+  // search params for filtering through rides
+  const [searchParams, setSearchParams] = useSearchParams();
+  const typeFilter = searchParams.get('type');
+
   // loading state
   const [loading, setLoading] = useState<boolean>(false);
   // error state
   const [error, setError] = useState<any>(null);
 
-  // search params for filtering through rides
-  const [searchParams, setSearchParams] = useSearchParams();
-  const typeFilter = searchParams.get('type');
-
-  // hook that fetches api data on page load
-  useEffect(() => {
-    async function loadRides() {
-      setLoading(true);
-      try {
-        const data = await getRides();
-        setRides(data);
-      } catch (err) {
-        console.log(err);
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadRides();
-  }, []);
+  // utilize loader data instead of use effect hook to fetch data
+  const rides = useLoaderData();
 
   const displayedRides = typeFilter
     ? rides.filter((ride) => ride.type === typeFilter)
