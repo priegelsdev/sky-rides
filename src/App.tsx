@@ -24,6 +24,8 @@ import HostRideInfo from './pages/Host/HostRideInfo';
 import HostRidePricing from './pages/Host/HostRidePricing';
 import HostRidePhotos from './pages/Host/HostRidePhotos';
 
+// components
+import Error from './Components/Error';
 //layout
 import Layout from './Components/Layout';
 import HostLayout from './Components/HostLayout';
@@ -38,7 +40,12 @@ export default function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
-        <Route path="rides" element={<Rides />} loader={ridesLoader} />
+        <Route
+          path="rides"
+          element={<Rides />}
+          loader={ridesLoader}
+          errorElement={<Error />}
+        />
         <Route path="rides/:id" element={<RideDetail />} />
 
         <Route path="host" element={<HostLayout />}>
