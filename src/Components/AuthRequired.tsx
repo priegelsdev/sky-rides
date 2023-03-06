@@ -1,11 +1,21 @@
-import { Outlet, Navigate } from 'react-router-dom';
+import { Outlet, Navigate, useLocation } from 'react-router-dom';
 
 export default function AuthRequired() {
-  // TODO: testing auth with token
-  const auth = { token: 1 };
+  const isLoggedIn = localStorage.getItem('loggedin');
+  const location = useLocation();
 
-  if (!auth.token) {
-    return <Navigate to="/login" state={{ message: 'Log in required.' }} />;
+  if (isLoggedIn != 'true') {
+    return (
+      <Navigate
+        to="/login"
+        // display message from state when page accessed without auth;
+        // use from location, so user gets redirected after login
+        state={{ message: 'Log in required.', from: location.pathname }}
+        // prevent call to navigate from pushing new entry into history stack by using replace true
+        // if user clicks back button, she/he won't see login page again
+        replace={true}
+      />
+    );
   }
   return <Outlet />;
 }

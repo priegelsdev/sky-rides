@@ -28,6 +28,7 @@ export default function Login() {
 
   // use location state for when user gets rerouted automatically for when not logged in but trying to access protected route
   const location = useLocation();
+  const from = location.state?.from || '/';
   // bring in navigate hook
   const navigate = useNavigate();
 
@@ -42,8 +43,8 @@ export default function Login() {
     // calling login function; since returning a promise, chain to get info
     logInUser(logInData)
       .then((data) => {
-        console.log(data);
-        navigate('/host');
+        localStorage.setItem('loggedin', 'true');
+        navigate(from, { replace: true });
       })
       .catch((err) => setError(err))
       .finally(() => setStatus('idle'));
