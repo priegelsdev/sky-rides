@@ -13,7 +13,8 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Rides, { loader as ridesLoader } from './pages/Rides/Rides';
 import RideDetail from './pages/Rides/RideDetail';
-import Login from './pages/Login';
+// action function for form data
+import Login, { action as loginAction } from './pages/Login';
 import NotFound from './pages/NotFound';
 
 import Dashboard from './pages/Host/Dashboard';
@@ -41,7 +42,7 @@ export default function App() {
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="login" element={<Login />} />
+        <Route path="login" element={<Login />} action={loginAction} />
         <Route path="about" element={<About />} />
         <Route
           path="rides"
