@@ -12,16 +12,19 @@ interface Ride {
   hostId: string;
 }
 
+interface LoaderData {
+  rides: Ride[];
+}
+
 // loader function to fetch data
 export function loader() {
   return defer({ rides: getHostRides() });
 }
 
 export default function HostRides() {
-  const dataPromise = useLoaderData();
-  console.log(dataPromise);
+  const dataPromise = useLoaderData() as LoaderData;
 
-  function renderHostRideEls(rides) {
+  function renderHostRideEls(rides: Ride[]) {
     const rideElements = rides.map((ride) => (
       <Link to={`${ride.id}`}>
         <div className="flex gap-5 items-center bg-secondary text-gray-800 p-5 rounded-sm">
