@@ -1,5 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { json, Link, useParams, useLocation } from 'react-router-dom';
+import { Suspense } from 'react';
+import {
+  Link,
+  useParams,
+  useLocation,
+  useLoaderData,
+  defer,
+  Await,
+} from 'react-router-dom';
+import { getRides } from '../../../api';
 
 const backArrow = (
   <svg
@@ -28,12 +36,19 @@ interface Ride {
   type: string;
 }
 
+export function loader({ params }) {
+  return { ride: getRides(params.id) };
+}
+
 export default function RideDetail() {
   // get route params
   const params = useParams();
 
   // get location to go back to filtered page if filter was active
   const location = useLocation();
+
+  // loader data
+  const dataPromise = useLoaderData();
 
   // switch statement to determine text for back to rides button
   function filterOption() {
@@ -52,55 +67,50 @@ export default function RideDetail() {
     }
   }
 
-  // initialize ride state as null to avoid errors when rendering unfetched state
-  const [ride, setRide] = useState<Ride | null>(null);
-
-  useEffect(() => {
-    fetch(`/api/rides/${params.id}`)
-      .then((res) => res.json())
-      .then((data) => setRide(data.rides));
-  }, [params.id]);
-
   return (
     <div className="text-white px-6">
-      {ride ? (
-        <div className="lg:flex lg:flex-col lg:max-w-[40rem] lg:m-auto">
-          <Link
-            relative="path"
-            to={location ? `../?${location.state.search}` : '..'}
-            className="flex gap-2 ml-4 underline underline-offset-2"
-          >
-            {backArrow} Back to {filterOption()} rides
-          </Link>
-          <img
-            className="aspect-square max-h-[32rem] lg:max-h-[40rem] lg:h-[40rem] lg:min-w-[40rem] rounded-md mt-6 mb-12"
-            src={ride.imageUrl}
-          />
-          <span
-            className={`rounded-md py-1 px-6 text-gray-800 ${
-              ride.type === 'rugged'
-                ? 'bg-accent'
-                : ride.type === 'luxury'
-                ? 'bg-accentTwo'
-                : 'bg-secondary'
-            }
-            lg:max-w-[6.2rem] 
-            `}
-          >
-            {ride.type}
-          </span>
-          <h1 className="text-3xl font-bold my-6">{ride.name}</h1>
-          <p className="mb-4 text-xl">
-            <span className="text-2xl font-bold">${ride.price}</span>/day
-          </p>
-          <p className="mb-4 lg:max-w-[40rem] ">{ride.description}</p>
-          <button className="w-full bg-accentTwo text-gray-800 rounded-md text-lg font-semibold py-2 mb-6 lg:max-w-[40rem]">
-            Rent this ride
-          </button>
-        </div>
-      ) : (
-        'Loading...'
-      )}
+      <div className="lg:flex lg:flex-col lg:max-w-[40rem] lg:m-auto">
+        <Link
+          relative="path"
+          to={location ? `../?${location.state.search}` : '..'}
+          className="flex gap-2 ml-4 underline underline-offset-2"
+        >
+          {backArrow} Back to {filterOption()} rides
+        </Link>
+        <Suspense fallback={<h2>loading...</h2>}>
+          <Await resolve={dataPromise.ride}>
+            {(ride) => (
+              <>
+                <img
+                  className="aspect-square max-h-[32rem] lg:max-h-[40rem] lg:h-[40rem] lg:min-w-[40rem] rounded-md mt-6 mb-12"
+                  src={ride.imageUrl}
+                />
+                <span
+                  className={`rounded-md py-1 px-6 text-gray-800 ${
+                    ride.type === 'rugged'
+                      ? 'bg-accent'
+                      : ride.type === 'luxury'
+                      ? 'bg-accentTwo'
+                      : 'bg-secondary'
+                  }
+                lg:max-w-[6.2rem] 
+                `}
+                >
+                  {ride.type}
+                </span>
+                <h1 className="text-3xl font-bold my-6">{ride.name}</h1>
+                <p className="mb-4 text-xl">
+                  <span className="text-2xl font-bold">${ride.price}</span>/day
+                </p>
+                <p className="mb-4 lg:max-w-[40rem] ">{ride.description}</p>
+                <button className="w-full bg-accentTwo text-gray-800 rounded-md text-lg font-semibold py-2 mb-6 lg:max-w-[40rem]">
+                  Rent this ride
+                </button>
+              </>
+            )}
+          </Await>
+        </Suspense>
+      </div>
     </div>
   );
 }

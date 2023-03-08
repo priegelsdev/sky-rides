@@ -12,7 +12,9 @@ import {
 import Home from './pages/Home';
 import About from './pages/About';
 import Rides, { loader as ridesLoader } from './pages/Rides/Rides';
-import RideDetail from './pages/Rides/RideDetail';
+import RideDetail, {
+  loader as rideDetailLoader,
+} from './pages/Rides/RideDetail';
 // action function for form data
 import Login, { action as loginAction } from './pages/Login';
 import NotFound from './pages/NotFound';
@@ -21,7 +23,9 @@ import Dashboard from './pages/Host/Dashboard';
 import Reviews from './pages/Host/Reviews';
 import Income from './pages/Host/Income';
 import HostRides, { loader as hostRidesLoader } from './pages/Host/HostRides';
-import HostRideDetail from './pages/Host/HostRideDetail';
+import HostRideDetail, {
+  loader as hostRideDetailLoader,
+} from './pages/Host/HostRideDetail';
 import HostRideInfo from './pages/Host/HostRideInfo';
 import HostRidePricing from './pages/Host/HostRidePricing';
 import HostRidePhotos from './pages/Host/HostRidePhotos';
@@ -50,7 +54,11 @@ export default function App() {
           loader={ridesLoader}
           errorElement={<Error />}
         />
-        <Route path="rides/:id" element={<RideDetail />} />
+        <Route
+          path="rides/:id"
+          element={<RideDetail />}
+          loader={rideDetailLoader}
+        />
 
         <Route element={<AuthRequired />}>
           <Route path="host" element={<HostLayout />}>
@@ -62,7 +70,11 @@ export default function App() {
               element={<HostRides />}
               loader={hostRidesLoader}
             />
-            <Route path="rides/:id" element={<HostRideDetail />}>
+            <Route
+              path="rides/:id"
+              element={<HostRideDetail />}
+              loader={hostRideDetailLoader}
+            >
               <Route index element={<HostRideInfo />} />
               <Route path="pricing" element={<HostRidePricing />} />
               <Route path="photos" element={<HostRidePhotos />} />

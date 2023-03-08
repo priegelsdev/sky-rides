@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { Suspense } from 'react';
 import {
-  json,
   Link,
   NavLink,
-  useParams,
+  useLoaderData,
   Outlet,
   useOutletContext,
+  defer,
+  Await,
 } from 'react-router-dom';
+import { getHostRides } from '../../../api';
 
 const backArrow = (
   <svg
@@ -40,18 +42,13 @@ type ContextType = {
   ride: Ride;
 };
 
+export function loader({ params }) {
+  return defer({ ride: getHostRides(params.id) });
+}
+
 export default function HostRideDetail() {
-  // get route params
-  const params = useParams();
-
-  // initialize ride state as null to avoid errors when rendering unfetched state
-  const [ride, setRide] = useState<Ride | null>(null);
-
-  useEffect(() => {
-    fetch(`/api/host/rides/${params.id}`)
-      .then((res) => res.json())
-      .then((data) => setRide(data.rides[0]));
-  }, [params.id]);
+  // loader data
+  const dataPromise = useLoaderData();
 
   return (
     <div>
@@ -62,75 +59,82 @@ export default function HostRideDetail() {
       >
         {backArrow} Back to all rides
       </Link>
-      {ride ? (
-        <div className="bg-secondary text-gray-800 p-5 rounded-sm mb-6">
-          <div className="flex gap-4">
-            <img
-              className="aspect-square max-h-52 rounded-md"
-              src={ride.imageUrl}
-            />
-            <div className="flex flex-col items-start justify-center">
-              <span
-                className={`text-xs md:text-sm rounded-md py-1 px-4 ${
-                  ride.type === 'rugged'
-                    ? 'bg-accent'
-                    : ride.type === 'luxury'
-                    ? 'bg-accentTwo'
-                    : 'bg-secondary border border-gray-600'
-                }
+      <Suspense fallback={<h2>loading..</h2>}>
+        <Await resolve={dataPromise.ride}>
+          {(rideArr) => {
+            const ride: Ride = rideArr[0];
+            return (
+              <div className="bg-secondary text-gray-800 p-5 rounded-sm mb-6">
+                <div className="flex gap-4">
+                  <img
+                    className="aspect-square max-h-52 rounded-md"
+                    src={ride.imageUrl}
+                  />
+                  <div className="flex flex-col items-start justify-center">
+                    <span
+                      className={`text-xs md:text-sm rounded-md py-1 px-4 ${
+                        ride.type === 'rugged'
+                          ? 'bg-accent'
+                          : ride.type === 'luxury'
+                          ? 'bg-accentTwo'
+                          : 'bg-secondary border border-gray-600'
+                      }
             lg:max-w-[6.2rem] 
             `}
-              >
-                {ride.type}
-              </span>
-              <h1 className="text-xl md:text-2xl font-bold mt-3">
-                {ride.name}
-              </h1>
-              <p>
-                <span className="md:text-lg font-bold">${ride.price}</span>
-                /day
-              </p>
-            </div>
-          </div>
-          {/* NAVBAR for host ride detail */}
-          <nav className="flex gap-3 my-4">
-            <NavLink
-              end
-              to="."
-              className={({ isActive }) =>
-                isActive
-                  ? 'underline underline-offset-1 font-bold'
-                  : 'hover:font-bold hover:underline underline-offset-1'
-              }
-            >
-              Details
-            </NavLink>
-            <NavLink
-              to="pricing"
-              className={({ isActive }) =>
-                isActive
-                  ? 'underline underline-offset-1 font-bold'
-                  : 'hover:font-bold hover:underline underline-offset-1'
-              }
-            >
-              Pricing
-            </NavLink>
-            <NavLink
-              to="photos"
-              className={({ isActive }) =>
-                isActive
-                  ? 'underline underline-offset-1 font-bold'
-                  : 'hover:font-bold hover:underline underline-offset-1'
-              }
-            >
-              Photos
-            </NavLink>
-          </nav>
-          <Outlet context={{ ride }} />
-        </div>
-      ) : (
-        'Loading...'
-      )}
+                    >
+                      {ride.type}
+                    </span>
+                    <h1 className="text-xl md:text-2xl font-bold mt-3">
+                      {ride.name}
+                    </h1>
+                    <p>
+                      <span className="md:text-lg font-bold">
+                        ${ride.price}
+                      </span>
+                      /day
+                    </p>
+                  </div>
+                </div>
+                {/* NAVBAR for host ride detail */}
+                <nav className="flex gap-3 my-4">
+                  <NavLink
+                    end
+                    to="."
+                    className={({ isActive }) =>
+                      isActive
+                        ? 'underline underline-offset-1 font-bold'
+                        : 'hover:font-bold hover:underline underline-offset-1'
+                    }
+                  >
+                    Details
+                  </NavLink>
+                  <NavLink
+                    to="pricing"
+                    className={({ isActive }) =>
+                      isActive
+                        ? 'underline underline-offset-1 font-bold'
+                        : 'hover:font-bold hover:underline underline-offset-1'
+                    }
+                  >
+                    Pricing
+                  </NavLink>
+                  <NavLink
+                    to="photos"
+                    className={({ isActive }) =>
+                      isActive
+                        ? 'underline underline-offset-1 font-bold'
+                        : 'hover:font-bold hover:underline underline-offset-1'
+                    }
+                  >
+                    Photos
+                  </NavLink>
+                </nav>
+                <Outlet context={{ ride }} />
+              </div>
+            );
+          }}
+        </Await>
+      </Suspense>
     </div>
   );
 }
