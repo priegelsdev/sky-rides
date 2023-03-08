@@ -18,6 +18,11 @@ interface Ride {
   type: string;
 }
 
+// define loader data type
+interface LoaderData {
+  rides: Ride[];
+}
+
 // loader data
 export function loader() {
   return defer({ rides: getRides() });
@@ -36,15 +41,15 @@ export default function Rides() {
   // utilize loader data instead of use effect hook to fetch data
   // use type assertion to prevent 'unknown' error
   /* const rides: Ride[] = useLoaderData() as Ride[]; */
-  const dataPromise = useLoaderData();
+  const dataPromise = useLoaderData() as LoaderData;
 
   // function to render elements in await component
-  function renderRideElements(rides) {
+  function renderRideElements(rides: Ride[]) {
     const displayedRides = typeFilter
-      ? rides.filter((ride) => ride.type === typeFilter)
+      ? rides.filter((ride: Ride) => ride.type === typeFilter)
       : rides;
 
-    const rideElements = displayedRides.map((ride) => (
+    const rideElements = displayedRides.map((ride: Ride) => (
       <Link to={`${ride.id}`} state={{ search: searchParams.toString() }}>
         <div>
           <img
@@ -132,6 +137,7 @@ export default function Rides() {
       <h1 className="text-accent text-3xl font-semibold">
         Explore our ride options
       </h1>
+      {/* Wrapping Await component in Suspense so while ride elements are loading user sees loading text */}
       <Suspense
         fallback={<h2 className="text-3xl font-bold mt-5">Loading...</h2>}
       >
