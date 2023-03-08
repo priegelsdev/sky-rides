@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import {
   Link,
   useLocation,
@@ -41,11 +40,8 @@ export default function Login() {
   const navigate = useNavigate();
   // bring in navigation hook
   const navigation = useNavigation();
-  console.log(data);
-  console.log(navigation);
-  console.log(location);
-  console.log(from);
 
+  // reroute if token is found
   if (data?.token) {
     navigate(from, { replace: true });
   }
@@ -102,6 +98,15 @@ export default function Login() {
         >
           Go to Host
         </Link>
+        <button
+          onClick={() => {
+            localStorage.removeItem('loggedin');
+            window.location.reload();
+          }}
+          className="bg-accentTwo text-center rounded-md py-2 px-4"
+        >
+          Logout
+        </button>
       </div>
     );
   }

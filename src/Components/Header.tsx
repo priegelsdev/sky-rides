@@ -25,11 +25,6 @@ export default function Header() {
     document.getElementById('navbar')?.classList.toggle('mt-10');
   }
 
-  // function for logout to remove token from local storage
-  function logOut() {
-    localStorage.removeItem('loggedin');
-  }
-
   return (
     <header className="relative bg-primary flex justify-between text-white font-inter py-10 px-6 border-none">
       <Link
@@ -74,7 +69,6 @@ export default function Header() {
           Rides
         </NavLink>
         <NavLink to="/login">{userIcon}</NavLink>
-        <button onClick={logOut}>X</button>
       </nav>
     </header>
   );

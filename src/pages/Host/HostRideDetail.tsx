@@ -78,9 +78,7 @@ export default function HostRideDetail() {
                           : ride.type === 'luxury'
                           ? 'bg-accentTwo'
                           : 'bg-secondary border border-gray-600'
-                      }
-            lg:max-w-[6.2rem] 
-            `}
+                      } lg:max-w-[6.2rem]`}
                     >
                       {ride.type}
                     </span>
