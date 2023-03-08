@@ -20,7 +20,7 @@ import NotFound from './pages/NotFound';
 import Dashboard from './pages/Host/Dashboard';
 import Reviews from './pages/Host/Reviews';
 import Income from './pages/Host/Income';
-import HostRides from './pages/Host/HostRides';
+import HostRides, { loader as hostRidesLoader } from './pages/Host/HostRides';
 import HostRideDetail from './pages/Host/HostRideDetail';
 import HostRideInfo from './pages/Host/HostRideInfo';
 import HostRidePricing from './pages/Host/HostRidePricing';
@@ -57,7 +57,11 @@ export default function App() {
             <Route index element={<Dashboard />} />
             <Route path="income" element={<Income />} />
             <Route path="reviews" element={<Reviews />} />
-            <Route path="rides" element={<HostRides />} />
+            <Route
+              path="rides"
+              element={<HostRides />}
+              loader={hostRidesLoader}
+            />
             <Route path="rides/:id" element={<HostRideDetail />}>
               <Route index element={<HostRideInfo />} />
               <Route path="pricing" element={<HostRidePricing />} />
