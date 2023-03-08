@@ -50,7 +50,7 @@ export default function Login() {
     navigate(from, { replace: true });
   }
 
-  if (!localStorage.getItem('loggedin', 'true')) {
+  if (!localStorage.getItem('loggedin')) {
     return (
       <div className="flex flex-col px-6 gap-6 md:w-[50%] lg:w-[40%] md:m-auto">
         {location.state?.message && (
