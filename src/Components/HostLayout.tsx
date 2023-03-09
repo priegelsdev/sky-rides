@@ -4,7 +4,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 export default function Layout() {
   return (
     <div className="px-6 text-gray-200">
-      <nav className="flex gap-3 mb-8">
+      <nav className="flex gap-3 mb-6">
         <NavLink
           end
           to="."

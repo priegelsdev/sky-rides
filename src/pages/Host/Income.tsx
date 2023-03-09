@@ -17,9 +17,9 @@ export default function Income() {
   ));
 
   return (
-    <div className="px-6">
+    <div className="">
       <div>
-        <h1 className="font-bold text-accent text-3xl mt-8 mb-2">Income</h1>
+        <h1 className="font-bold text-accent text-3xl mb-2">Income</h1>
         <h4>
           Last <span className="font-bold underline">30 days</span>
         </h4>
