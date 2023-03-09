@@ -44,7 +44,7 @@ interface LoaderData {
 
 // define params type
 interface Params {
-  id: number;
+  id?: number;
 }
 
 // define the object with params coming back from loader
