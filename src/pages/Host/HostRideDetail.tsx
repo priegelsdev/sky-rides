@@ -37,18 +37,35 @@ interface Ride {
   type: string;
 }
 
+// define loader data for dataPromise
+interface LoaderData {
+  ride: Ride[];
+}
+
+// define params type
+interface Params {
+  id: number;
+}
+
+// define the object with params coming back from loader
+interface LoaderParams {
+  params: Params;
+}
+
 // define outlet context type
 type ContextType = {
   ride: Ride;
 };
 
-export function loader({ params }) {
-  return defer({ ride: getHostRides(params.id) });
+export function loader({ params }: LoaderParams) {
+  const id = params.id;
+  return defer({ ride: getHostRides(id) });
 }
 
 export default function HostRideDetail() {
   // loader data
-  const dataPromise = useLoaderData();
+  const dataPromise = useLoaderData() as LoaderData;
+  console.log(dataPromise);
 
   return (
     <div>

@@ -36,8 +36,24 @@ interface Ride {
   type: string;
 }
 
-export function loader({ params }) {
-  return { ride: getRides(params.id) };
+// define loaderData for dataPromise
+interface LoaderData {
+  ride: Ride[];
+}
+
+// define params type
+interface Params {
+  id: number;
+}
+
+// define the object with params coming back from loader
+interface LoaderParams {
+  params: Params;
+}
+
+export function loader({ params }: LoaderParams) {
+  const id = params.id;
+  return { ride: getRides(id) };
 }
 
 export default function RideDetail() {
@@ -48,7 +64,7 @@ export default function RideDetail() {
   const location = useLocation();
 
   // loader data
-  const dataPromise = useLoaderData();
+  const dataPromise = useLoaderData() as LoaderData;
 
   // switch statement to determine text for back to rides button
   function filterOption() {
