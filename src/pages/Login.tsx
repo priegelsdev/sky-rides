@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   Link,
   useLocation,
@@ -12,6 +13,7 @@ import { logInUser } from '../../api';
 interface LoginResponse {
   token?: string;
   error?: string;
+  from?: string;
 }
 
 // action function to utilize React Router FormData & handle Form submit
@@ -20,11 +22,12 @@ export async function action({ request }: any) {
   const formData = await request.formData();
   const email = formData.get('email');
   const password = formData.get('password');
+  const from = formData.get('from');
 
   try {
     const data = await logInUser({ email, password });
     localStorage.setItem('loggedin', 'true');
-    return data;
+    return { ...data, from };
   } catch (err: any) {
     return { error: err.message };
   }
@@ -36,15 +39,19 @@ export default function Login() {
   // use location state for when user gets rerouted automatically for when not logged in but trying to access protected route
   const location = useLocation();
   const from = location.state?.from || '/host';
+  console.log(from);
   // bring in navigate hook
   const navigate = useNavigate();
   // bring in navigation hook
   const navigation = useNavigation();
 
   // reroute if token is found
-  if (data?.token) {
-    navigate(from, { replace: true });
-  }
+  useEffect(() => {
+    console.log('Effect running. data:', data);
+    if (data?.token && data.from) {
+      navigate(data.from, { replace: true });
+    }
+  }, [data]);
 
   if (!localStorage.getItem('loggedin')) {
     return (
@@ -70,6 +77,7 @@ export default function Login() {
             placeholder="Email address"
             className="p-2.5 border-gray-500 border rounded-md rounded-b-none"
           ></input>
+          <input type="hidden" value={from} name="from"></input>
           <input
             name="password"
             type="password"
