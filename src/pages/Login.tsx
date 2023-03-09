@@ -39,7 +39,6 @@ export default function Login() {
   // use location state for when user gets rerouted automatically for when not logged in but trying to access protected route
   const location = useLocation();
   const from = location.state?.from || '/host';
-  console.log(from);
   // bring in navigate hook
   const navigate = useNavigate();
   // bring in navigation hook
@@ -47,7 +46,6 @@ export default function Login() {
 
   // reroute if token is found
   useEffect(() => {
-    console.log('Effect running. data:', data);
     if (data?.token && data.from) {
       navigate(data.from, { replace: true });
     }
@@ -77,6 +75,7 @@ export default function Login() {
             placeholder="Email address"
             className="p-2.5 border-gray-500 border rounded-md rounded-b-none"
           ></input>
+          {/*workaround: hidden input field to save FROM value from being lost while rerendering component*/}
           <input type="hidden" value={from} name="from"></input>
           <input
             name="password"
