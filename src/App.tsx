@@ -19,7 +19,7 @@ import RideDetail, {
 import Login, { action as loginAction } from './pages/Login';
 import NotFound from './pages/NotFound';
 
-import Dashboard from './pages/Host/Dashboard';
+import Dashboard, { loader as dashboardLoader } from './pages/Host/Dashboard';
 import Reviews from './pages/Host/Reviews';
 import Income from './pages/Host/Income';
 import HostRides, { loader as hostRidesLoader } from './pages/Host/HostRides';
@@ -62,7 +62,7 @@ export default function App() {
 
         <Route element={<AuthRequired />}>
           <Route path="host" element={<HostLayout />}>
-            <Route index element={<Dashboard />} />
+            <Route index element={<Dashboard />} loader={dashboardLoader} />
             <Route path="income" element={<Income />} />
             <Route path="reviews" element={<Reviews />} />
             <Route
