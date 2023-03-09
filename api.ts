@@ -1,5 +1,5 @@
 // function to fetch rides for Rides page
-export async function getRides(id: number) {
+export async function getRides(id?: number) {
   // optional id to make function accessible to detail page
   const url = id ? `/api/rides/${id}` : '/api/rides';
   const res = await fetch(url);
@@ -18,7 +18,7 @@ export async function getRides(id: number) {
 }
 
 // function to fetch rides for HostRides page
-export async function getHostRides(id: number) {
+export async function getHostRides(id?: number) {
   // optional id to make function accessible to detail page
   const url = id ? `/api/host/rides/${id}` : '/api/host/rides';
   const res = await fetch(url);
